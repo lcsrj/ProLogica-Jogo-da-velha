@@ -1,25 +1,28 @@
-
 # Jogo da Velha em Prolog
 
-Projeto desenvolvido para a disciplina de **Programação Lógica**, com o objetivo de representar o **Jogo da Velha** utilizando o paradigma declarativo da linguagem Prolog.
+Projeto final de **Programação Lógica** desenvolvido em **Prolog**, usando o jogo da velha como domínio lógico.
 
-Neste projeto, o estado do jogo é descrito por meio de **fatos**, e as decisões do sistema são obtidas por meio de **regras lógicas**, sem uso de controle imperativo explícito, como laços ou estruturas tradicionais de decisão.
-
----
-
-## Objetivo do projeto
-
-O objetivo deste trabalho é demonstrar como um jogo simples pode ser modelado utilizando programação lógica.
-
-O programa permite realizar consultas sobre o estado do tabuleiro, identificar vencedores, verificar casas vazias, detectar empate, saber se o jogo está em andamento e sugerir jogadas possíveis com base nas regras declaradas.
+Neste projeto, o jogador humano joga como **X** e a CPU joga como **O**. O jogo é interativo pelo terminal e utiliza fatos, regras, inferência lógica, unificação e backtracking para controlar as jogadas e determinar o vencedor.
 
 ---
 
-## Tema escolhido
+## Objetivo
 
-O tema escolhido foi o **Jogo da Velha**.
+Desenvolver um jogo baseado em programação lógica, no qual o comportamento seja representado por fatos e regras.
 
-O jogo possui um tabuleiro 3x3, no qual dois jogadores, representados pelos símbolos `x` e `o`, alternam jogadas até que um deles consiga formar uma sequência de três símbolos iguais em uma linha, coluna ou diagonal.
+O objetivo principal é demonstrar o paradigma declarativo do Prolog: em vez de escrever um passo a passo imperativo, o programa declara relações lógicas e o Prolog deduz as respostas a partir dessas regras.
+
+---
+
+## Tema
+
+**Jogo da Velha interativo com CPU**
+
+- Jogador humano: `x`
+- CPU: `o`
+- Tabuleiro: 3 linhas por 3 colunas
+- Entrada do jogador: linha e coluna
+- Saída: tabuleiro atualizado, jogada da CPU e resultado da partida
 
 ---
 
@@ -27,65 +30,172 @@ O jogo possui um tabuleiro 3x3, no qual dois jogadores, representados pelos sím
 
 - Prolog
 - SWI-Prolog
-- Paradigma de Programação Lógica
+- Terminal ou console do SWI-Prolog
 
 ---
 
 ## Estrutura do projeto
 
 ```text
-jogo_da_velha_prolog/
+ProLogica-Jogo-da-velha/
 │
 ├── jogo_da_velha.pl
-├── README.md
-└── apresentacao_jogo_da_velha.pdf
+└── README.md
 ```
 
-### Descrição dos arquivos
+### `jogo_da_velha.pl`
 
-| Arquivo | Descrição |
-|---|---|
-| `jogo_da_velha.pl` | Código-fonte do jogo em Prolog |
-| `README.md` | Relatório completo e explicação do projeto |
-| `apresentacao_jogo_da_velha.pdf` | Slides de apresentação do projeto |
+Arquivo principal do jogo. Contém:
+
+- fatos dinâmicos das jogadas;
+- regras de vitória;
+- regras de empate;
+- validação das jogadas;
+- exibição do tabuleiro;
+- lógica da CPU;
+- interação com o usuário.
+
+### `README.md`
+
+Arquivo de documentação do projeto, contendo explicação, relatório, exemplos de uso e instruções para execução.
 
 ---
 
 ## Como executar o projeto
 
-### 1. Instalar o SWI-Prolog
+### 1. Instale o SWI-Prolog
 
-Para executar o projeto, é necessário ter o **SWI-Prolog** instalado no computador.
-
-Site oficial:
+Baixe e instale o SWI-Prolog pelo site oficial:
 
 ```text
 https://www.swi-prolog.org/
 ```
 
----
+### 2. Baixe o arquivo do projeto
 
-### 2. Abrir o arquivo no SWI-Prolog
+Certifique-se de ter o arquivo:
 
-Abra o terminal na pasta do projeto e execute:
-
-```bash
-swipl jogo_da_velha.pl
+```text
+jogo_da_velha.pl
 ```
 
-Outra opção é abrir o SWI-Prolog e carregar o arquivo com o comando:
+Por exemplo, ele pode estar na pasta:
+
+```text
+C:/Users/User/Downloads/jogo_da_velha.pl
+```
+
+### 3. Abra o SWI-Prolog
+
+Ao abrir, aparecerá algo parecido com:
 
 ```prolog
-?- [jogo_da_velha].
+1 ?-
 ```
+
+### 4. Carregue o arquivo
+
+Digite:
+
+```prolog
+consult(['c:/Users/User/Downloads/jogo_da_velha.pl']).
+```
+
+Depois pressione **Enter**.
+
+Se estiver correto, o Prolog responderá:
+
+```prolog
+true.
+```
+
+Isso significa que o arquivo foi carregado com sucesso.
+
+### 5. Inicie o jogo
+
+Digite:
+
+```prolog
+iniciar.
+```
+
+Depois pressione **Enter**.
+
+O jogo será iniciado no terminal.
 
 ---
 
-## Modelagem do domínio
+## Como jogar
 
-O domínio do jogo foi modelado por meio de fatos que representam as posições do tabuleiro.
+O jogador humano sempre joga como **X**.
 
-A estrutura principal utilizada foi:
+A CPU sempre joga como **O**.
+
+O tabuleiro usa linhas e colunas numeradas de 1 a 3:
+
+```text
+    1   2   3
+  +---+---+---+
+1 |   |   |   |
+  +---+---+---+
+2 |   |   |   |
+  +---+---+---+
+3 |   |   |   |
+  +---+---+---+
+```
+
+Quando aparecer:
+
+```text
+Linha:
+```
+
+Digite apenas o número da linha, por exemplo:
+
+```text
+1
+```
+
+Depois aparecerá:
+
+```text
+Coluna:
+```
+
+Digite apenas o número da coluna, por exemplo:
+
+```text
+2
+```
+
+Não coloque ponto final quando o jogo pedir linha e coluna.
+
+---
+
+## Exemplo de partida
+
+```text
+Sua vez!
+Linha: 1
+Coluna: 1
+```
+
+Depois disso, o jogo registra sua jogada como `x`.
+
+Em seguida, a CPU joga automaticamente:
+
+```text
+Vez da CPU...
+CPU jogou na linha 2, coluna 2.
+```
+
+O tabuleiro é exibido novamente e a partida continua até vitória ou empate.
+
+---
+
+## Como as jogadas funcionam
+
+Cada jogada é armazenada como um fato Prolog no formato:
 
 ```prolog
 posicao(Linha, Coluna, Jogador).
@@ -95,495 +205,481 @@ Exemplo:
 
 ```prolog
 posicao(1, 1, x).
-posicao(1, 2, x).
-posicao(1, 3, x).
 ```
 
-Esses fatos indicam que o jogador `x` ocupa as três posições da primeira linha.
+Esse fato significa que o jogador `x` ocupou a linha 1 e coluna 1.
 
-Também foram definidos os jogadores válidos:
-
-```prolog
-jogador(x).
-jogador(o).
-```
-
-E as casas vazias foram representadas da seguinte forma:
-
-```prolog
-posicao(3, 1, vazio).
-posicao(3, 2, vazio).
-posicao(3, 3, vazio).
-```
-
----
-
-## Regras principais
-
-### Verificação de jogador válido
-
-```prolog
-jogador(x).
-jogador(o).
-```
-
-Define quais símbolos representam jogadores válidos no jogo.
-
----
-
-### Verificação de casa vazia
-
-```prolog
-casa_vazia(L, C) :-
-    posicao(L, C, vazio).
-```
-
-Essa regra verifica se uma posição do tabuleiro está vazia.
-
----
-
-### Verificação de casa ocupada
-
-```prolog
-casa_ocupada(L, C) :-
-    posicao(L, C, J),
-    jogador(J).
-```
-
-Essa regra verifica se uma determinada posição está ocupada por um jogador válido.
-
----
-
-### Vitória por linha
-
-```prolog
-vencedor(J) :-
-    jogador(J),
-    posicao(L, 1, J),
-    posicao(L, 2, J),
-    posicao(L, 3, J).
-```
-
-Essa regra identifica se algum jogador venceu ocupando as três colunas de uma mesma linha.
-
----
-
-### Vitória por coluna
-
-```prolog
-vencedor(J) :-
-    jogador(J),
-    posicao(1, C, J),
-    posicao(2, C, J),
-    posicao(3, C, J).
-```
-
-Essa regra identifica se algum jogador venceu ocupando as três linhas de uma mesma coluna.
-
----
-
-### Vitória pelas diagonais
-
-```prolog
-vencedor(J) :-
-    jogador(J),
-    posicao(1, 1, J),
-    posicao(2, 2, J),
-    posicao(3, 3, J).
-```
-
-```prolog
-vencedor(J) :-
-    jogador(J),
-    posicao(1, 3, J),
-    posicao(2, 2, J),
-    posicao(3, 1, J).
-```
-
-Essas regras verificam vitória pela diagonal principal e pela diagonal secundária.
-
----
-
-### Verificação de empate
-
-```prolog
-empate :-
-    \+ vencedor(x),
-    \+ vencedor(o),
-    \+ existe_casa_vazia.
-```
-
-O empate ocorre quando não existe vencedor e também não existem casas vazias no tabuleiro.
-
----
-
-### Verificação de fim de jogo
-
-```prolog
-fim_de_jogo :-
-    vencedor(_).
-
-fim_de_jogo :-
-    empate.
-```
-
-O jogo termina quando existe um vencedor ou quando ocorre empate.
-
----
-
-### Sugestão de jogada
-
-```prolog
-melhor_jogada(J, L, C) :-
-    pode_vencer(J, L, C).
-
-melhor_jogada(J, L, C) :-
-    jogador(J),
-    casa_vazia(L, C).
-```
-
-Essa regra tenta encontrar uma jogada que permita ao jogador vencer. Caso não exista vitória imediata, ela retorna casas vazias disponíveis.
-
----
-
-## Exemplos de consultas
-
-### Consultar o vencedor
-
-```prolog
-?- vencedor(J).
-```
-
-Resultado esperado:
-
-```prolog
-J = x.
-```
-
-Neste caso, o Prolog encontra que o jogador `x` venceu, pois ocupa as três casas da primeira linha.
-
----
-
-### Verificar se o jogador X venceu
-
-```prolog
-?- vencedor(x).
-```
-
-Resultado esperado:
-
-```prolog
-true.
-```
-
----
-
-### Verificar se o jogador O venceu
-
-```prolog
-?- vencedor(o).
-```
-
-Resultado esperado:
-
-```prolog
-false.
-```
-
----
-
-### Consultar casas vazias
-
-```prolog
-?- casa_vazia(L, C).
-```
-
-Resultado esperado:
-
-```prolog
-L = 3,
-C = 1 ;
-
-L = 3,
-C = 2 ;
-
-L = 3,
-C = 3.
-```
-
-Essa consulta demonstra o uso de **backtracking**, pois o Prolog retorna todas as posições que satisfazem a regra `casa_vazia`.
-
----
-
-### Verificar se o jogo acabou
-
-```prolog
-?- fim_de_jogo.
-```
-
-Resultado esperado:
-
-```prolog
-true.
-```
-
-Como existe um vencedor, o jogo é considerado finalizado.
-
----
-
-### Verificar se o jogo ainda está em andamento
-
-```prolog
-?- jogo_em_andamento.
-```
-
-Resultado esperado:
-
-```prolog
-false.
-```
-
-O jogo não está em andamento porque já existe um vencedor.
-
----
-
-### Consultar possíveis jogadas
-
-```prolog
-?- melhor_jogada(o, L, C).
-```
-
-Resultado possível:
-
-```prolog
-L = 3,
-C = 1 ;
-
-L = 3,
-C = 2 ;
-
-L = 3,
-C = 3.
-```
-
-Como o jogador `o` não possui vitória imediata nesse estado do tabuleiro, o sistema retorna casas vazias disponíveis.
-
----
-
-## Conceitos de programação lógica utilizados
-
-### Fatos
-
-Fatos representam informações verdadeiras dentro do programa.
-
-Exemplo:
-
-```prolog
-posicao(1, 1, x).
-```
-
-Esse fato informa que a posição da linha 1 e coluna 1 está ocupada pelo jogador `x`.
-
----
-
-### Regras
-
-Regras definem relações lógicas entre os fatos.
-
-Exemplo:
-
-```prolog
-casa_vazia(L, C) :-
-    posicao(L, C, vazio).
-```
-
-Essa regra afirma que uma casa está vazia se existir uma posição correspondente marcada como `vazio`.
-
----
-
-### Variáveis
-
-Variáveis são usadas para representar valores desconhecidos que o Prolog tenta descobrir.
-
-Exemplo:
-
-```prolog
-?- vencedor(J).
-```
-
-Nesse caso, `J` é uma variável. O Prolog procura qual jogador satisfaz a regra de vitória.
-
----
-
-### Unificação
-
-A unificação é o processo pelo qual o Prolog tenta combinar uma consulta com os fatos e regras existentes.
-
-Exemplo:
-
-```prolog
-?- vencedor(J).
-```
-
-Se o Prolog encontra que `x` satisfaz as regras de vitória, ele unifica a variável `J` com o valor `x`:
-
-```prolog
-J = x.
-```
-
----
-
-### Backtracking
-
-Backtracking é o mecanismo usado pelo Prolog para procurar múltiplas soluções para uma consulta.
-
-Exemplo:
-
-```prolog
-?- casa_vazia(L, C).
-```
-
-O Prolog retorna a primeira casa vazia. Ao pedir mais respostas, ele continua procurando outras posições que também satisfaçam a regra.
-
----
-
-## Relatório do projeto
-
-### Introdução
-
-Este trabalho apresenta a construção de um Jogo da Velha utilizando a linguagem Prolog. A proposta é demonstrar o funcionamento do paradigma de programação lógica, no qual o programa é construído a partir de fatos e regras.
-
-Em vez de descrever passo a passo como o jogo deve ser executado, o programa declara informações sobre o tabuleiro e define regras para que o próprio interpretador Prolog realize inferências.
-
----
-
-### Descrição do jogo
-
-O Jogo da Velha é um jogo de estratégia simples para dois jogadores. O tabuleiro é formado por três linhas e três colunas. Cada jogador escolhe um símbolo, normalmente `x` ou `o`, e o objetivo é formar uma sequência de três símbolos iguais.
-
-A vitória pode ocorrer em uma linha, coluna ou diagonal. Caso todas as casas sejam preenchidas sem que nenhum jogador vença, o jogo termina empatado.
-
----
-
-### Modelagem do conhecimento
-
-O conhecimento do jogo foi modelado através de fatos que indicam o conteúdo de cada posição do tabuleiro.
-
-Cada posição possui três informações:
-
-1. Linha;
-2. Coluna;
-3. Conteúdo da casa.
-
-Exemplo:
+Outro exemplo:
 
 ```prolog
 posicao(2, 2, o).
 ```
 
-Esse fato representa que a posição localizada na linha 2 e coluna 2 está ocupada pelo jogador `o`.
+Esse fato significa que a CPU, representada por `o`, ocupou a linha 2 e coluna 2.
 
-Além disso, foram criadas regras para identificar casas vazias, casas ocupadas, vencedores, empate, fim de jogo e jogadas possíveis.
+Durante o jogo, esses fatos são adicionados dinamicamente com `assertz/1`.
+
+Exemplo:
+
+```prolog
+assertz(posicao(Linha, Coluna, x))
+```
+
+Isso adiciona uma nova jogada do jogador humano à base de conhecimento do Prolog.
 
 ---
 
-### Regras principais
+## Como o vencedor é determinado
 
-As principais regras do projeto são:
+O vencedor é determinado por regras lógicas.
 
-| Regra | Função |
-|---|---|
-| `casa_vazia(L, C)` | Verifica se uma casa está vazia |
-| `casa_ocupada(L, C)` | Verifica se uma casa está ocupada |
-| `vencedor(J)` | Verifica se um jogador venceu |
-| `empate` | Verifica se houve empate |
-| `jogo_em_andamento` | Verifica se o jogo ainda continua |
-| `fim_de_jogo` | Verifica se o jogo terminou |
-| `pode_vencer(J, L, C)` | Verifica se um jogador pode vencer em uma jogada |
-| `melhor_jogada(J, L, C)` | Sugere uma jogada possível |
+O jogo da velha possui 8 possibilidades de vitória:
 
-Essas regras permitem que o Prolog responda consultas sobre o estado do jogo utilizando inferência lógica.
+- 3 linhas;
+- 3 colunas;
+- 2 diagonais.
+
+### Vitória por linha
+
+```prolog
+vencedor(Jogador) :-
+    jogador(Jogador),
+    posicao(Linha, 1, Jogador),
+    posicao(Linha, 2, Jogador),
+    posicao(Linha, 3, Jogador).
+```
+
+Essa regra significa:
+
+> Um jogador vence se existir uma linha em que as três colunas estejam ocupadas por ele.
+
+Exemplo:
+
+```text
+x | x | x
+```
+
+Nesse caso, o jogador `x` venceu por linha.
+
+### Vitória por coluna
+
+```prolog
+vencedor(Jogador) :-
+    jogador(Jogador),
+    posicao(1, Coluna, Jogador),
+    posicao(2, Coluna, Jogador),
+    posicao(3, Coluna, Jogador).
+```
+
+Essa regra significa:
+
+> Um jogador vence se existir uma coluna em que as três linhas estejam ocupadas por ele.
+
+Exemplo:
+
+```text
+x
+x
+x
+```
+
+### Vitória pela diagonal principal
+
+```prolog
+vencedor(Jogador) :-
+    jogador(Jogador),
+    posicao(1, 1, Jogador),
+    posicao(2, 2, Jogador),
+    posicao(3, 3, Jogador).
+```
+
+Essa regra verifica a diagonal principal:
+
+```text
+x |   |
+  | x |
+  |   | x
+```
+
+### Vitória pela diagonal secundária
+
+```prolog
+vencedor(Jogador) :-
+    jogador(Jogador),
+    posicao(1, 3, Jogador),
+    posicao(2, 2, Jogador),
+    posicao(3, 1, Jogador).
+```
+
+Essa regra verifica a diagonal secundária:
+
+```text
+  |   | x
+  | x |
+x |   |
+```
 
 ---
 
-### Exemplos de consultas com resultados obtidos
+## Como a CPU joga
 
-Consulta:
+A CPU segue uma ordem de prioridade lógica:
 
-```prolog
-?- vencedor(J).
-```
+1. Se puder vencer, joga para vencer.
+2. Se o jogador humano estiver quase vencendo, bloqueia.
+3. Se o centro estiver livre, joga no centro.
+4. Se algum canto estiver livre, joga no canto.
+5. Se nenhuma das opções anteriores for possível, escolhe qualquer casa vazia.
 
-Resultado:
-
-```prolog
-J = x.
-```
-
-Consulta:
+A regra principal da CPU é:
 
 ```prolog
-?- casa_vazia(L, C).
+escolher_jogada_cpu(Linha, Coluna) :-
+    pode_vencer(o, Linha, Coluna),
+    !.
 ```
 
-Resultado:
+Ela significa que, se a CPU conseguir vencer em uma jogada, essa jogada será escolhida.
+
+Depois vem a regra de bloqueio:
 
 ```prolog
-L = 3,
-C = 1 ;
-L = 3,
-C = 2 ;
-L = 3,
-C = 3.
+escolher_jogada_cpu(Linha, Coluna) :-
+    pode_vencer(x, Linha, Coluna),
+    !.
 ```
 
-Consulta:
+Essa regra verifica se o jogador `x` está próximo de vencer. Se estiver, a CPU ocupa a posição para impedir a vitória.
+
+---
+
+## Consultas úteis para testar
+
+Depois de carregar o arquivo, além de jogar com `iniciar.`, também é possível testar consultas diretamente no Prolog.
+
+### Verificar vencedor
 
 ```prolog
-?- fim_de_jogo.
+vencedor(Jogador).
 ```
 
-Resultado:
+Se houver vencedor, o Prolog retorna algo como:
+
+```prolog
+Jogador = x.
+```
+
+ou:
+
+```prolog
+Jogador = o.
+```
+
+### Verificar se o jogo empatou
+
+```prolog
+empate.
+```
+
+Resultado possível:
 
 ```prolog
 true.
 ```
 
-Consulta:
-
-```prolog
-?- jogo_em_andamento.
-```
-
-Resultado:
+ou:
 
 ```prolog
 false.
 ```
 
+### Verificar uma jogada válida
+
+```prolog
+jogada_valida(1, 1).
+```
+
+Se a casa estiver livre, retorna:
+
+```prolog
+true.
+```
+
+Se estiver ocupada, retorna:
+
+```prolog
+false.
+```
+
+### Verificar se alguém pode vencer
+
+```prolog
+pode_vencer(x, Linha, Coluna).
+```
+
+Essa consulta mostra se o jogador `x` possui alguma jogada que levaria à vitória.
+
+Também pode ser testada para a CPU:
+
+```prolog
+pode_vencer(o, Linha, Coluna).
+```
+
 ---
 
-### Paradigma declarativo
+## Conceitos de programação lógica usados
 
-O projeto evidencia o paradigma declarativo porque o programa não define uma sequência de comandos para encontrar o vencedor. Em vez disso, ele declara fatos sobre o estado do tabuleiro e regras que representam as condições do jogo.
+### Fatos
 
-A partir dessas declarações, o Prolog utiliza inferência lógica para responder às consultas. Por exemplo, ao consultar `vencedor(J)`, o sistema procura automaticamente um valor para `J` que satisfaça alguma das regras de vitória.
+Fatos representam verdades sobre o domínio.
 
-Dessa forma, o comportamento do jogo emerge das relações lógicas definidas no programa.
+Exemplo:
+
+```prolog
+jogador(x).
+jogador(o).
+```
+
+Esses fatos dizem que `x` e `o` são jogadores válidos.
+
+### Regras
+
+Regras representam condições lógicas.
+
+Exemplo:
+
+```prolog
+vencedor(Jogador) :-
+    posicao(Linha, 1, Jogador),
+    posicao(Linha, 2, Jogador),
+    posicao(Linha, 3, Jogador).
+```
+
+Essa regra diz que um jogador vence se ocupar três posições da mesma linha.
+
+### Variáveis
+
+Variáveis começam com letra maiúscula.
+
+Exemplos:
+
+```prolog
+Jogador
+Linha
+Coluna
+```
+
+Na consulta:
+
+```prolog
+vencedor(Jogador).
+```
+
+O Prolog tenta descobrir qual valor pode substituir `Jogador`.
+
+### Unificação
+
+Unificação é o processo de combinar uma variável com um valor que torna uma regra verdadeira.
+
+Exemplo:
+
+```prolog
+vencedor(Jogador).
+```
+
+Se o jogador `x` venceu, o Prolog retorna:
+
+```prolog
+Jogador = x.
+```
+
+Isso significa que a variável `Jogador` foi unificada com o valor `x`.
+
+### Backtracking
+
+Backtracking é a busca automática por outras soluções possíveis.
+
+Exemplo:
+
+```prolog
+jogada_valida(Linha, Coluna).
+```
+
+O Prolog pode encontrar várias casas livres. Ao pressionar `;`, ele procura a próxima solução.
 
 ---
 
-### Conclusão
+# Relatório
 
-O projeto demonstrou como o Jogo da Velha pode ser representado utilizando programação lógica em Prolog. Através de fatos e regras, foi possível modelar o tabuleiro, identificar vencedores, verificar estados do jogo e consultar jogadas possíveis.
+## Introdução
 
-O uso de variáveis, unificação e backtracking permite que o Prolog encontre respostas automaticamente, reforçando o caráter declarativo da solução.
+Este trabalho apresenta o desenvolvimento de um jogo da velha utilizando a linguagem Prolog. O projeto foi criado para demonstrar o uso do paradigma declarativo da programação lógica, no qual o programador descreve fatos e regras, e o sistema realiza inferências a partir dessas informações.
 
-Portanto, o trabalho atende aos requisitos propostos, mostrando de forma clara como a lógica pode ser usada para representar e analisar um jogo baseado em regras.
+No jogo implementado, o usuário joga como `x` e a CPU joga como `o`. A partida acontece de forma interativa no terminal, com o usuário informando linha e coluna para realizar suas jogadas.
 
----
+## Descrição do jogo
 
-## Autor
+O jogo da velha é um jogo de tabuleiro para dois jogadores. O tabuleiro é formado por 3 linhas e 3 colunas. Cada jogador, em sua vez, escolhe uma posição vazia para marcar seu símbolo.
 
-Lucas Costa e Silva
+Neste projeto:
 
+- o jogador humano utiliza `x`;
+- a CPU utiliza `o`;
+- o jogador informa linha e coluna;
+- a CPU escolhe sua jogada automaticamente;
+- o jogo termina quando alguém vence ou quando ocorre empate.
+
+Um jogador vence quando consegue formar três símbolos iguais em uma linha, coluna ou diagonal.
+
+## Modelagem do conhecimento
+
+O conhecimento do jogo foi modelado por meio de fatos e regras.
+
+Os jogadores são representados pelos fatos:
+
+```prolog
+jogador(x).
+jogador(o).
+```
+
+As jogadas são representadas pelo predicado dinâmico:
+
+```prolog
+posicao(Linha, Coluna, Jogador).
+```
+
+Esse predicado representa o estado atual do tabuleiro.
+
+Por exemplo:
+
+```prolog
+posicao(1, 1, x).
+```
+
+indica que o jogador `x` marcou a linha 1 e coluna 1.
+
+Como as jogadas mudam durante a execução, o predicado `posicao/3` foi declarado como dinâmico:
+
+```prolog
+:- dynamic posicao/3.
+```
+
+Isso permite adicionar e remover fatos durante a execução do jogo.
+
+## Regras principais
+
+As principais regras do projeto são:
+
+- `vencedor/1`: verifica se algum jogador venceu;
+- `empate/0`: verifica se o jogo terminou empatado;
+- `fim_de_jogo/0`: verifica se a partida acabou;
+- `jogada_valida/2`: verifica se uma posição pode ser ocupada;
+- `pode_vencer/3`: verifica se existe uma jogada de vitória;
+- `escolher_jogada_cpu/2`: define a jogada da CPU.
+
+A regra `vencedor/1` é uma das mais importantes, pois determina se um jogador possui uma sequência vencedora.
+
+Exemplo de vitória por linha:
+
+```prolog
+vencedor(Jogador) :-
+    jogador(Jogador),
+    posicao(Linha, 1, Jogador),
+    posicao(Linha, 2, Jogador),
+    posicao(Linha, 3, Jogador).
+```
+
+Essa regra declara que um jogador vence quando ocupa as três colunas de uma mesma linha.
+
+## Exemplos de consultas com resultados obtidos
+
+### Consulta 1
+
+```prolog
+vencedor(Jogador).
+```
+
+Resultado possível:
+
+```prolog
+Jogador = x.
+```
+
+Esse resultado indica que o jogador `x` venceu a partida.
+
+### Consulta 2
+
+```prolog
+vencedor(o).
+```
+
+Resultado possível:
+
+```prolog
+true.
+```
+
+Esse resultado indica que a CPU venceu.
+
+### Consulta 3
+
+```prolog
+empate.
+```
+
+Resultado possível:
+
+```prolog
+true.
+```
+
+Esse resultado indica que todas as casas foram preenchidas e nenhum jogador venceu.
+
+### Consulta 4
+
+```prolog
+jogada_valida(2, 2).
+```
+
+Resultado possível:
+
+```prolog
+true.
+```
+
+Esse resultado indica que a posição linha 2, coluna 2 está livre.
+
+### Consulta 5
+
+```prolog
+pode_vencer(x, Linha, Coluna).
+```
+
+Resultado possível:
+
+```prolog
+Linha = 1,
+Coluna = 3.
+```
+
+Esse resultado indica que o jogador `x` poderia vencer jogando na linha 1, coluna 3.
+
+## Paradigma declarativo
+
+O projeto evidencia o paradigma declarativo porque o código não descreve apenas uma sequência de comandos. Em vez disso, ele declara fatos sobre o jogo e regras que definem quando uma situação é verdadeira.
+
+A partir dessas declarações, o Prolog consegue responder consultas como:
+
+```prolog
+vencedor(Jogador).
+```
+
+O sistema procura automaticamente valores para as variáveis que satisfaçam as regras. Assim, o resultado surge por inferência lógica.
+
+## Conclusão
+
+O projeto demonstra a aplicação da programação lógica no desenvolvimento de um jogo da velha interativo. O domínio foi modelado por fatos, as regras representam as condições de vitória e empate, e as consultas demonstram inferência lógica.
+
+A implementação também utiliza variáveis, unificação e backtracking, conceitos fundamentais do Prolog. Além disso, a CPU utiliza regras para escolher suas jogadas, priorizando vitória, bloqueio e posições estratégicas.
+
+Dessa forma, o trabalho atende ao objetivo de evidenciar o paradigma declarativo da programação lógica por meio de um jogo funcional e interativo.
